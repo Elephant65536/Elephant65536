@@ -6,6 +6,7 @@ import random
 kindness_list=[] #keep track of how kind robot is, gauge user's opinion of robot
 random1 = random.randint(1, 5) #have multiple responses
 random2 = random.randint(1, 7)
+random3 = random.randint(1, 3)
 kindness_level = 0 #how kind the robot's response was 1-5
 
 #when power button is pressed (robot will speak this)
@@ -22,21 +23,17 @@ def name():
     #The person's name stated, and translated into text and put into the variable, "user_name
 
     if random1 == 1:
-        print("Hmm..."+user_name+" is a very interesting name.\n")
+        print("Hmm..."+user_name+" is a very interesting name.\n")#robot will speak green lines
         kindness_level = 3
-
     elif random1 == 2:
         print("I like that name! I've met someone named ",user_name," before!\n")
         kindness_level = 4
-
     elif random1 == 3:
         print("I'm sorry. ",user_name," is a horrible name.\n")
         kindness_level = 1
-
     elif random1 == 4:
         print(user_name," seems very basic, doesn't it?\n")
         kindness_level = 2
-
     elif random1 == 5:
         print("I love the name, ",user_name,". It's so unique!\n")
         kindness_level = 5
@@ -53,26 +50,58 @@ def color():
     print(robot_color)
 
     if fav_color == robot_color:
-        print("That's so cool! We have the same favorite color!"
+        print("That's so cool! We have the same favorite color!")
         kindness_level = 5
-    else
+    else:
         print("That's a nice color.")
+        print("My favorite color is ",robot_color," ."
         kindness_level = 3
-    kinness_list.append(kindness_level)
+    kindness_list.append(kindness_level)
 
-name()
+def math():
+    global random3
+    wants_math = input("Would you like me to do math for you?")
+    #the words "yes" or "no" are said into the microphone and translated into text
+    if wants_math == "Yes" or wants_math == "yes":
+        if random3 == 1:
+            print("I'm happy to help!")
+            kindness_level = 5
+        elif random3 == 2:
+            print("I guess I could help you.")
+            kindness_level = 3
+        elif random3 == 3:
+            print("Haha! You're stupid, aren't you!")
+            kindness_level = 1
+    else:
+        if random3 == 1:
+            print("Oh, thats all right!")
+            kindness_level = 5
+        elif random3 == 2:
+            print("You're missing out.")
+            kindness_level = 3
+        elif random3 == 3:
+            print("What?! You think you're too smart for me?")
+            kindness_level = 1
+    kindness_list.append(kindness_level) 
+
+def kindness():
+    temp_var = 0
+    for i in kindness_list:
+      temp_var = temp_var + i
+    print("My kindness rating is currently ",temp_var," .")
+
+    
+'''
+This is the code the runs the functions
+'''
 color()
+name()
+math()
+kindness()
+
 
 '''
-
 Should you be able to ask it questions? If so, we need some indicator that it should listen
 like siri (button, signal word). The idea is for it to ask you questions and it responds.
-
 '''
-
-
-
-
-
-
 
