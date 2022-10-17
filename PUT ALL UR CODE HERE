@@ -1,4 +1,5 @@
 
+#import modules
 import time
 import random
 #Conversation Practice
@@ -11,17 +12,20 @@ kindness_level = 0 #how kind the robot's response was 1-5
 
 #when power button is pressed (robot will speak this)
 print("Hello! It's nice to meet you. I am a conversation robot.")
-
+time.sleep(2.0)
 
 
 '''
 These are the functions. They are possible things that the robot can say/respond to.
 '''
+#Ask user for their name
 def name():
+    time.sleep(1.0)
     user_name = input(str("What is your name?\n"))
     global random1
     #The person's name stated, and translated into text and put into the variable, "user_name
 
+    time.sleep(2.0)
     if random1 == 1:
         print("Hmm..."+user_name+" is a very interesting name.\n")#robot will speak green lines
         kindness_level = 3
@@ -37,28 +41,37 @@ def name():
     elif random1 == 5:
         print("I love the name, ",user_name,". It's so unique!\n")
         kindness_level = 5
+    print("\n")
     kindness_list.append(kindness_level)
 
+#Ask for user's favorite color
 def color():
+    time.sleep(1.0)
     global random2                    
     print("What is your favorite color?")
+    time.sleep(1.0)
     fav_color = input("Please have a capital letter in your color like 'Blue'")
     #The color is said in microphone and translated into text
 
     color_list = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Violet"]
     robot_color = color_list[(random2)]
-    print(robot_color)
 
+    time.sleep(2.0)
     if fav_color == robot_color:
         print("That's so cool! We have the same favorite color!")
         kindness_level = 5
     else:
         print("That's a nice color.")
-        print("My favorite color is ",robot_color," ."
+        print("My favorite color is ",robot_color,".")
         kindness_level = 3
+    print("\n")
     kindness_list.append(kindness_level)
 
-def math():
+def do_math():
+    
+#Ask to do math
+def ask_math():
+    time.sleep(1.0)
     global random3
     wants_math = input("Would you like me to do math for you?")
     #the words "yes" or "no" are said into the microphone and translated into text
@@ -72,6 +85,8 @@ def math():
         elif random3 == 3:
             print("Haha! You're stupid, aren't you!")
             kindness_level = 1
+        print("\n")
+        math()
     else:
         if random3 == 1:
             print("Oh, thats all right!")
@@ -82,26 +97,63 @@ def math():
         elif random3 == 3:
             print("What?! You think you're too smart for me?")
             kindness_level = 1
+    print("\n")
     kindness_list.append(kindness_level) 
 
+#Ask robot to do math
+def math():
+    time.sleep(1.0)
+    print("I can only do arithmetic. Please tell me two numbers and the operation.")
+    number1 = int(input("What is number 1?"))
+    time.sleep(1)
+    number2 = int(input("What is number 2?"))
+    time.sleep(1)
+    print("What operation would you like me to do?")
+    time.sleep(1)
+    operation = input("(Say 'add', 'subtract', 'multiply', or 'divide'")
+    print("Components noted.")
+    time.sleep(2)
+    print("\n")
+    
+    if operation == "add":
+        answer = number1+number2
+        print("Your answer is...",answer,"!")
+    elif operation == "subtract":
+        answer = number1-number2
+        print("Your answer is...",answer,"!")
+    elif operation == "multiply":
+        answer = number1*number2
+        print("Your answer is...",answer,"!")
+    elif operation == "divide":
+        answer = number1/number2
+        print("Your answer is...",answer,"!")
+    print("Anytime you want me to do math, say 'do math'!")
+    print("\n")
+    
+          
+    
+#Calculate how nice the robot has been
 def kindness():
+    time.sleep(1.0)
     temp_var = 0
     for i in kindness_list:
       temp_var = temp_var + i
     print("My kindness rating is currently ",temp_var," .")
+    print("\n")
 
     
 '''
 This is the code the runs the functions
 '''
-color()
-name()
 math()
-kindness()
 
 
 '''
 Should you be able to ask it questions? If so, we need some indicator that it should listen
 like siri (button, signal word). The idea is for it to ask you questions and it responds.
 '''
+
+
+
+
 
