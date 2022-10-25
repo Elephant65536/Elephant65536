@@ -4,11 +4,34 @@ import time
 import random
 #Conversation Practice
 
-kindness_list=[] #keep track of how kind robot is, gauge user's opinion of robot
-random1 = random.randint(1, 5) #have multiple responses
-random2 = random.randint(1, 7)
-random3 = random.randint(1, 3)
 kindness_level = 0 #how kind the robot's response was 1-5
+kindness_list=[] #keep track of how kind robot is, gauge user's opinion of robot
+
+random1 = random.randint(1, 5) #have multiple responses
+random2 = random.randint(0, 6)
+random3 = random.randint(1, 3)
+
+was_called = False
+var = 1
+
+'''
+#curfun_dict or current function dictionary 
+curfun_dict = {
+    0: "function check",
+    1: "name",
+    2: "color",
+    3: "do math",
+    4: "ask math",
+    5: "math",
+    6: "kindness"
+}
+'''
+
+fun_val = 0#fun_val is the function value, where each number is a function
+fun_list = []#fun list is the list of fun_vals where each number corresponds to a function
+
+check_list = []#check list allows variables from functions to be carried over to other functions
+#side note: maybe make check_list a dictionary
 
 #when power button is pressed (robot will speak this)
 print("Hello! It's nice to meet you. I am a conversation robot.")
@@ -18,93 +41,111 @@ time.sleep(2.0)
 '''
 These are the functions. They are possible things that the robot can say/respond to.
 '''
+    
 #Ask user for their name
 def name():
-    curfun = 
+     
+    fun_val = 1
+    fun_list.append(fun_val)#keeping track of current function
     
     time.sleep(1.0)
-    user_name = input(str("What is your name?\n"))
-    global random1
-    #The person's name stated, and translated into text and put into the variable, "user_name
-
-    time.sleep(2.0)
-    if random1 == 1:
-        print("Hmm..."+user_name+" is a very interesting name.\n")#robot will speak green lines
-        kindness_level = 3
-    elif random1 == 2:
-        print("I like that name! I've met someone named ",user_name," before!\n")
-        kindness_level = 4
-    elif random1 == 3:
-        print("I'm sorry. ",user_name," is a horrible name.\n")
-        kindness_level = 1
-    elif random1 == 4:
-        print(user_name," seems very basic, doesn't it?\n")
-        kindness_level = 2
-    elif random1 == 5:
-        print("I love the name, ",user_name,". It's so unique!\n")
-        kindness_level = 5
-    print("\n")
-    kindness_list.append(kindness_level)
-
-#ask user how their day is
-def day():
-    time.sleep(1.0)
-    your_day = input("How are you? ")
-    bad_list = ["bad", "tired", "stressed", "not good", "not very good"]
-    good_list = ["good", "great", "amazing"]
-    time.sleep(2.0)
-    if random3 == 2:
-        if your_day in good_list:
-            print ("alright")
-        elif your_day in bad_list:
-            print ("that's a shame")
-        kindness_level = 3
-    elif random3 == 1:
-        if your_day in good_list:
-            print ("glad to hear that :D")
-        elif your_day in bad_list:
-            print (":( ")
-            print ("I hope talking to me will make you feel better :)")
-        kindness_level = 5
+    var = input("What is your name?\n")
+    check_list.append(var)
+    if var == "0":
+        do_math()
+    elif var == 0:
+        do_math
     else:
-        print("k.")
-        kindness_level = 1
-    kindness_list.append(kindness_level)
-    
+        global random1
+        #The person's name stated, and translated into text and put into the variable, "user_name
+
+        time.sleep(2.0)
+        if random1 == 1:
+            print("Hmm...",var," is a very interesting name.\n")#robot will speak green lines
+            kindness_level = 3
+        elif random1 == 2:
+            print("I like that name! I've met someone named ",var," before!\n")
+            kindness_level = 4
+        elif random1 == 3:
+            print("I'm sorry. ",var," is a horrible name.\n")
+            kindness_level = 1
+        elif random1 == 4:
+            print(var," seems very basic, doesn't it?\n")
+            kindness_level = 2
+        elif random1 == 5:
+            print("I love the name, ",var,". It's so unique!\n")
+            kindness_level = 5
+        print("\n")
+        kindness_list.append(kindness_level)
+
+        user_name = 0
+        user_name = var
+        check_list.append(user_name)
+
 #Ask for user's favorite color
 def color():
+
+    fun_val = 2
+    fun_list.append(fun_val)
+    
     time.sleep(1.0)
     global random2                    
     print("What is your favorite color?")
     time.sleep(1.0)
-    fav_color = input("Please have a capital letter in your color like 'Blue'")
-    #The color is said in microphone and translated into text
-
-    color_list = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Violet"]
-    robot_color = color_list[(random2)]
-
-    time.sleep(2.0)
-    if fav_color == robot_color:
-        print("That's so cool! We have the same favorite color!")
-        kindness_level = 5
+    var = input("Please have a capital letter in your color like 'Blue'")
+    check_list.append(var)
+    
+    if var == "0":
+        do_math()
+    elif var == 0:
+        do_math
     else:
-        print("That's a nice color.")
-        print("My favorite color is ",robot_color,".")
-        kindness_level = 3
-    print("\n")
-    kindness_list.append(kindness_level)
+        #The color is said in microphone and translated into text
+
+        color_list = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Violet"]
+        robot_color = color_list[(random2)]
+
+        time.sleep(2.0)
+        if var == robot_color:
+            print("That's so cool! We have the same favorite color!")
+            kindness_level = 5
+        else:
+            print("That's a nice color.")
+            print("My favorite color is ",robot_color,".")
+            kindness_level = 3
+        print("\n")
+        kindness_list.append(kindness_level)
+
+        fav_color = 0
+        fav_color = var
 
 def do_math():
-    if var == "do math":
+    fun_val = 3
+    fun_list.append(fun_val)
+
+    var = check_list[-1]
+    if var == 0:
         was_called = True
+        check_list.append(was_called)
+        print("\n")
         print("Please Hold...")
+        print("\n")
         time.sleep(1)
         math()
-    
-     
-    
-#Ask to do math
+    if var == "0":
+        was_called = True
+        check_list.append(was_called)
+        print("\n")
+        print("Please Hold...")
+        print("\n")
+        time.sleep(1)
+        math()
+        
+#Asks user if they want robot to do math
 def ask_math():
+    fun_val = 4
+    fun_list.append(fun_val)
+    
     time.sleep(1.0)
     global random3
     wants_math = input("Would you like me to do math for you?")
@@ -132,10 +173,15 @@ def ask_math():
             print("What?! You think you're too smart for me?")
             kindness_level = 1
     print("\n")
-    kindness_list.append(kindness_level) 
+    kindness_list.append(kindness_level)
 
+        
 #Ask robot to do math
 def math():
+
+    fun_val = 5
+    fun_list.append(fun_val)
+
     time.sleep(1.0)
     print("I can only do arithmetic. Please tell me two numbers and the operation.")
     number1 = int(input("What is number 1?"))
@@ -161,16 +207,36 @@ def math():
     elif operation == "divide":
         answer = number1/number2
         print("Your answer is...",answer,"!")
-    print("Anytime you want me to do math, say 'do math'!")
+    print("Anytime you want me to do math, say '0'!")
     print("\n")
 
+    was_called = check_list[-1]
+    past_function = fun_list[-3]
     if was_called == True:
+        time.sleep(1)
+        print("Please hold...Returning to the previous question.")
+        print("\n")
+        
+        time.sleep(2)
+        if past_function == 1:
+            name()
+        elif past_function == 2:
+            color()
+        elif past_function == 3:
+            do_math()
+        elif past_function == 4:
+            ask_math()
+        elif past_function == 5:
+            math()
+        elif past_function == 6:
+            kindness()
 
-    
-          
-    
 #Calculate how nice the robot has been
 def kindness():
+
+    fun_val = 6
+    fun_list.append(fun_val)
+    
     time.sleep(1.0)
     temp_var = 0
     for i in kindness_list:
@@ -178,15 +244,11 @@ def kindness():
     print("My kindness rating is currently ",temp_var," .")
     print("\n")
 
-def test():
-    var1 = var2 = 3
-    print(var1)
-    print(var2)
     
 '''
 This is the code the runs the functions
 '''
-name()
+ask_math()
 color()
 
 
