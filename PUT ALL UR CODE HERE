@@ -51,7 +51,7 @@ def day():
     time.sleep(1.0)
     your_day = input("How are you? ")
     bad_list = ["bad", "tired", "stressed", "not good", "not very good"]
-    good_list = ["good", "great", "amazing", "super"]
+    good_list = ["good", "great", "amazing"]
     time.sleep(2.0)
     if random3 == 2:
         if your_day in good_list:
