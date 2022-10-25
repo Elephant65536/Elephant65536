@@ -46,6 +46,31 @@ def name():
     print("\n")
     kindness_list.append(kindness_level)
 
+#ask user how their day is
+def day():
+    time.sleep(1.0)
+    your_day = input("How are you? ")
+    bad_list = ["bad", "tired", "stressed", "not good", "not very good"]
+    good_list = ["good", "great", "amazing", "super"]
+    time.sleep(2.0)
+    if random3 == 2:
+        if your_day in good_list:
+            print ("alright")
+        elif your_day in bad_list:
+            print ("that's a shame")
+        kindness_level = 3
+    elif random3 == 1:
+        if your_day in good_list:
+            print ("glad to hear that :D")
+        elif your_day in bad_list:
+            print (":( ")
+            print ("I hope talking to me will make you feel better :)")
+        kindness_level = 5
+    else:
+        print("k.")
+        kindness_level = 1
+    kindness_list.append(kindness_level)
+    
 #Ask for user's favorite color
 def color():
     time.sleep(1.0)
