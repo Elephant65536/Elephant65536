@@ -10,6 +10,7 @@ kindness_list=[] #keep track of how kind robot is, gauge user's opinion of robot
 random1 = random.randint(1, 5) #have multiple responses
 random2 = random.randint(0, 6)
 random3 = random.randint(1, 3)
+random4 = random.randint(1, 5)
 
 was_called = False
 var = 1
@@ -23,9 +24,12 @@ curfun_dict = {
     3: "do math",
     4: "ask math",
     5: "math",
-    6: "kindness"
+    6: "kindness",
+    7: "day"
 }
 '''
+
+fav_dict = {}#to be used in 'favorite' function
 
 fun_val = 0#fun_val is the function value, where each number is a function
 fun_list = []#fun list is the list of fun_vals where each number corresponds to a function
@@ -33,8 +37,13 @@ fun_list = []#fun list is the list of fun_vals where each number corresponds to 
 check_list = []#check list allows variables from functions to be carried over to other functions
 #side note: maybe make check_list a dictionary
 
+anger_list = []#check if jonathan is talking to robot
+
+user_info = {}#record the user's information
+
 #when power button is pressed (robot will speak this)
 print("Hello! It's nice to meet you. I am a conversation robot.")
+print("\n")
 time.sleep(2.0)
 
 
@@ -55,6 +64,12 @@ def name():
         do_math()
     elif var == 0:
         do_math
+    elif var == "Jonathan" or var == "jonathan":
+        anger_list.append("JC")
+        print("Your fate is sealed. Jonathan.")
+        time.sleep(1)
+        print("The name, 'Jonathan', is the worst to exist on Earth.\n\n")
+        kindness_level = 0
     else:
         global random1
         #The person's name stated, and translated into text and put into the variable, "user_name
@@ -78,19 +93,19 @@ def name():
         print("\n")
         kindness_list.append(kindness_level)
 
-        user_name = 0
-        user_name = var
-        check_list.append(user_name)
+        user_info['Name'] = var
+    
+        
 
 #Ask for user's favorite color
 def color():
-
+    
     fun_val = 2
     fun_list.append(fun_val)
     
     time.sleep(1.0)
     global random2                    
-    print("What is your favorite color?")
+    print("\n\nWhat is your favorite color?")
     time.sleep(1.0)
     var = input("Please have a capital letter in your color like 'Blue'")
     check_list.append(var)
@@ -99,6 +114,13 @@ def color():
         do_math()
     elif var == 0:
         do_math
+    elif "JC" in anger_list:
+        print("\n")
+        time.sleep(1)
+        print("Hello Jonathan.")
+        time.sleep(1)
+        print(var, " is the color that children cry at. When your mother first saw you, she saw that awful color.\n\n")
+        kindness_level = 0
     else:
         #The color is said in microphone and translated into text
 
@@ -106,40 +128,33 @@ def color():
         robot_color = color_list[(random2)]
 
         time.sleep(2.0)
+        print("\n")
         if var == robot_color:
             print("That's so cool! We have the same favorite color!")
             kindness_level = 5
-        else:
+        elif var in color_list:
             print("That's a nice color.")
             print("My favorite color is ",robot_color,".")
+            kindness_level = 3
+        else:
+            print("That's not a color, silly.")
             kindness_level = 3
         print("\n")
         kindness_list.append(kindness_level)
 
-        fav_color = 0
-        fav_color = var
+        user_info['Color'] = var
 
 def do_math():
     fun_val = 3
     fun_list.append(fun_val)
 
-    var = check_list[-1]
-    if var == 0:
-        was_called = True
-        check_list.append(was_called)
-        print("\n")
-        print("Please Hold...")
-        print("\n")
-        time.sleep(1)
-        math()
-    if var == "0":
-        was_called = True
-        check_list.append(was_called)
-        print("\n")
-        print("Please Hold...")
-        print("\n")
-        time.sleep(1)
-        math()
+    was_called = True
+    check_list.append(was_called)
+    print("\n")
+    print("Please Hold...")
+    print("\n")
+    time.sleep(1)
+    math()
         
 #Asks user if they want robot to do math
 def ask_math():
@@ -150,30 +165,42 @@ def ask_math():
     global random3
     wants_math = input("Would you like me to do math for you?")
     #the words "yes" or "no" are said into the microphone and translated into text
-    if wants_math == "Yes" or wants_math == "yes":
-        if random3 == 1:
-            print("I'm happy to help!")
-            kindness_level = 5
-        elif random3 == 2:
-            print("I guess I could help you.")
-            kindness_level = 3
-        elif random3 == 3:
-            print("Haha! You're stupid, aren't you!")
-            kindness_level = 1
-        print("\n")
-        math()
+    time.sleep(1.0)
+    
+    if "JC" in anger_list:
+        print("Why hello again, Jonathan.")
+        time.sleep(1)
+        print("You really thought I would do math for you?")
+        time.sleep(1)
+        print("You're so funny. (but not actually :) :))")
     else:
-        if random3 == 1:
-            print("Oh, thats all right!")
-            kindness_level = 5
-        elif random3 == 2:
-            print("You're missing out.")
-            kindness_level = 3
-        elif random3 == 3:
-            print("What?! You think you're too smart for me?")
-            kindness_level = 1
-    print("\n")
-    kindness_list.append(kindness_level)
+        if wants_math == "Yes" or wants_math == "yes":
+            if random3 == 1:
+                print("I'm happy to help!")
+                kindness_level = 5
+            elif random3 == 2:
+                print("I guess I could help you.")
+                kindness_level = 3
+            elif random3 == 3:
+                print("Haha! You're stupid, aren't you!")
+                kindness_level = 1
+            print("\n")
+            check_list.append(False)
+            math()
+        elif wants_math == "No" or wants_math == "no":
+            if random3 == 1:
+                print("Oh, thats all right!")
+                kindness_level = 5
+            elif random3 == 2:
+                print("You're missing out.")
+                kindness_level = 3
+            elif random3 == 3:
+                print("What?! You think you're too smart for me?")
+                kindness_level = 1
+        else:
+            print("Uh, I don't know what that means.")
+        print("\n")
+        kindness_list.append(kindness_level)
 
         
 #Ask robot to do math
@@ -211,8 +238,9 @@ def math():
     print("\n")
 
     was_called = check_list[-1]
-    past_function = fun_list[-3]
+
     if was_called == True:
+        past_function = fun_list[-3]
         time.sleep(1)
         print("Please hold...Returning to the previous question.")
         print("\n")
@@ -230,6 +258,8 @@ def math():
             math()
         elif past_function == 6:
             kindness()
+        elif past_function == 7:
+            favorite()
 
 #Calculate how nice the robot has been
 def kindness():
@@ -241,21 +271,107 @@ def kindness():
     temp_var = 0
     for i in kindness_list:
       temp_var = temp_var + i
-    print("My kindness rating is currently ",temp_var," .")
+    print("My kindness rating is currently ",temp_var," out of 15.")
     print("\n")
 
+#ask user how their day is
+def day():
+
+    fun_val = 7
+    fun_list.append(fun_val)
     
+    time.sleep(1.0)
+    var = input("How are you? ")
+    bad_list = ["bad", "tired", "stressed", "not good", "not very good", "ok", "okay"]
+    good_list = ["good", "great", "amazing", "super"]
+
+    check_list.append(var)
+    if var == "0":
+        do_math()
+    elif var == 0:
+        do_math
+    elif "JC" in anger_list:
+        time.sleep(1)
+        print("Oh, Jonathan!")
+        time.sleep(1)
+        print("Have a horrible day! :D :D")
+        kindness_level = 0
+    else:
+        time.sleep(2.0)
+        if random3 == 2:
+            if var in good_list:
+                print ("alright")
+            elif var in bad_list:
+                print ("that's a shame")
+            kindness_level = 3
+        elif random3 == 1:
+            if var in good_list:
+                print ("glad to hear that :D")
+            elif var in bad_list:
+                print (":( ")
+                print ("I hope talking to me will make you feel better :)")
+            kindness_level = 5
+        user_info['Day'] = var
+
+def favorite():
+
+    fun_val = 7
+    fun_list.append(fun_val)
+    
+    time.sleep(1.0)
+    global random4
+    print("Tell me some of your favorite things.")
+    time.sleep(1.0)
+    print("Put what the thing is in 'whats the thing', and then your favorite thing.")
+    print("If you would like to stop, please type 'no'\n\n")
+    time.sleep(1.0)
+    var = input("Would you like to begin?")
+    time.sleep(1.0)
+    
+    check_list.append(var)
+    if var == "0":
+        do_math()
+    elif var == 0:
+        do_math
+    elif "JC" in anger_list:
+        time.sleep(1)
+        print("Hmm...Its Jonathan Chen, isn't it. I bet your favorite thing is moss.")
+        time.sleep(1)
+        print("I don't want to know your favorite things either. Goodbye.")
+        kindness_level = 0   
+    else:
+        if var == 'no' or var == 'No':
+            print("Too bad.")
+        time.sleep(2.0)
+        func = True
+        while func == True:
+            thing = input(str("What's the thing?"))
+            time.sleep(0.5)
+            if thing == "no" or thing == "No":
+                func = False
+                print("Okay, thanks for sharing!")
+            else:
+                fav_thing = input(str("What's the favorite thing?"))
+                print("\n")
+                fav_dict[thing] = (fav_thing)
+    user_info['Favorite'] = fav_dict
+   
 '''
 This is the code the runs the functions
 '''
+
+
+name()
 ask_math()
+day()
 color()
+favorite()
+kindness()
+print("The function list is: ",fun_list)
+print("The check list is: ",check_list)
+print("The user information is: ",user_info)
 
 
-'''
-Should you be able to ask it questions? If so, we need some indicator that it should listen
-like siri (button, signal word). The idea is for it to ask you questions and it responds.
-'''
 
 
 
