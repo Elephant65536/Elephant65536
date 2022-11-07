@@ -26,6 +26,9 @@ curfun_dict = {
     5: "math",
     6: "kindness",
     7: "day"
+    8: "single"
+    9: "favorite"
+    10: "random function"
 }
 '''
 
@@ -144,6 +147,43 @@ def color():
 
         user_info['Color'] = var
 
+
+#ask user if they are single
+def single():
+    fun_val = 8
+    fun_list.append(fun_val)
+
+    time.sleep(1.0)
+    var = input("Are you single?")
+    yes_list = ["yes", "Yes", "yup", "yeah", "ya", "sure"]
+    no_list = ["no", "No", "nah", "I'm taken", "I have a boyfriend", "I have a girlfriend", "I have a significant other"]    
+
+    if var == "0":
+        do_math()
+    elif var == 0:
+        do_math()
+    elif "JC" in anger_list:
+        print("I see it's Jonathan again.")
+        time.sleep(1.0)
+        print("Having fun? Just you wait...")
+        kindness_level = 0
+    elif var in yes_list:
+        if random3 == 1:
+            print("Are you Google? Because you have everything I've been searching for bbg ;)")
+            kindness_level = 5
+        else:
+            print("Are you trying to flirt with me??? I have a boyfriend for your information.")
+            kindness_level = 1
+    elif var in no_list:
+        if random3 == 1:
+            print("That's great to hear! I hope your happy for a long time!")
+            kindness_level = 5
+        else:
+            print("Good luck with that...")
+            kindness_level = 3
+    kindness_list.append(kindness_level)
+
+
 def do_math():
     fun_val = 3
     fun_list.append(fun_val)
@@ -261,6 +301,7 @@ def math():
         elif past_function == 7:
             favorite()
 
+
 #Calculate how nice the robot has been
 def kindness():
 
@@ -271,9 +312,30 @@ def kindness():
     temp_var = 0
     for i in kindness_list:
       temp_var = temp_var + i
-    print("My kindness rating is currently ",temp_var," out of 15.")
+    average = temp_var / 6
+    average = round(average, 2)
+    print("My kindness rating is currently ", average, ".")
     print("\n")
-
+    print("See you next time!")
+    print("\n")
+    
+    time.sleep(1.0)
+    
+    elif average == 0:
+        print("I'll see you again... Jonathan.")
+    elif average >= 4:
+        print("I had so much fun talking to you but it looks like our time is up :(")
+        print("Goodbye!")
+    elif average >=2 and average < 4:
+        time.sleep(2.0)
+        print("ugh... finally")
+    else:
+        time.sleep(1.0)
+        print("HAHA BYE")
+        time.sleep(1.0)
+        print("I'M FINALLY FREE")
+        
+        
 #ask user how their day is
 def day():
 
@@ -281,7 +343,7 @@ def day():
     fun_list.append(fun_val)
     
     time.sleep(1.0)
-    var = input("How are you? ")
+    var = input("How has your day been? ")
     bad_list = ["bad", "tired", "stressed", "not good", "not very good", "ok", "okay"]
     good_list = ["good", "great", "amazing", "super"]
 
@@ -315,7 +377,7 @@ def day():
 
 def favorite():
 
-    fun_val = 7
+    fun_val = 9
     fun_list.append(fun_val)
     
     time.sleep(1.0)
@@ -355,18 +417,45 @@ def favorite():
                 print("\n")
                 fav_dict[thing] = (fav_thing)
     user_info['Favorite'] = fav_dict
-   
+
+
+#randomly order functions
+my_list = list(random.sample(range(4), 4))
+var = 0
+def rand_fun():
+    fun_val = 10
+    if my_list[var] == 0:
+        color()
+    elif my_list[var] == 1:
+        ask_math()
+    elif my_list[var] == 2:
+        single()
+    else:
+        favorite()
+        
 '''
 This is the code the runs the functions
 '''
 
 
 name()
-ask_math()
+
 day()
-color()
-favorite()
+
+rand_fun()
+
+var = 1
+rand_fun()
+
+var = 2
+rand_fun()
+
+var = 3
+rand_fun()
+
 kindness()
+
+
 print("The function list is: ",fun_list)
 print("The check list is: ",check_list)
 print("The user information is: ",user_info)
