@@ -34,3 +34,39 @@ if "hello" in text:
 
 if "what is your name" in text:
 	speak("My name is Bob")
+
+if "your mom" in text:
+	speak("your mom in my bed")
+
+if "mouth" in text:
+	speak("deez nuts")
+
+if "Spanish" in text:
+	speak("que padre")
+
+if "night" in text:
+	speak("your mommy")
+if "hey" in text:
+	speak("hey baby gorl")
+if "Bob" in text:
+	speak("I love you too emmie")
+if "Adrian" in text:
+	speak("Adrian sucks at snake")
+if "Eve" in text:
+	speak("I'm more superior haha")
+if "Jonathan" in text:
+	speak("These flavors are melting on my tongue")
+if "sister" in text:
+	speak("haha you suck")
+if "child" in text:
+	speak("Ian is bad.")
+if "teacher" in text:
+	speak("Hello Mr. Beesly")
+if "I do not like you" in text:
+	speak("haha no you uno reverse")
+if "will" in text:
+	speak("Hello Will you suck deez nuts")
+if "dog" in text:
+	speak("Your weird Mahdi")
+if "Bye" in text:
+	speak("Good Bye")
