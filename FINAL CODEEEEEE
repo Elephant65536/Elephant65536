@@ -1,0 +1,423 @@
+
+#import modules
+import time
+import random
+#Conversation Practice
+import speech_recognition as sr
+from gtts import gTTS
+import os
+import time
+import playsound
+import random
+import pyttsx3
+import speech_recognition as sr
+import winsound
+
+talk = pyttsx3.init()
+
+kindness_level = 0 #how kind the robot's response was 1-5
+kindness_list=[] #keep track of how kind robot is, gauge user's opinion of robot
+
+random1 = random.randint(1, 5) #have multiple responses
+random2 = random.randint(0, 6)
+random3 = random.randint(1, 3)
+random4 = random.randint(1, 5)
+
+was_called = False
+var = 1
+loop = True
+
+'''
+#curfun_dict or current function dictionary 
+curfun_dict = {
+    0: "function check",
+    1: "name",
+    2: "color",
+    3: "do math",
+    4: "ask math",
+    5: "math",
+    6: "kindness",
+    7: "day"
+    8: "single"
+    9: "favorite"
+    10: "random function"
+}
+'''
+
+fav_dict = {}#to be used in 'favorite' function
+
+fun_val = 0#fun_val is the function value, where each number is a function
+fun_list = []#fun list is the list of fun_vals where each number corresponds to a function
+
+check_list = []#check list allows variables from functions to be carried over to other functions
+#side note: maybe make check_list a dictionary
+
+anger_list = []#check if jonathan is talking to robot
+
+user_info = {}#record the user's information
+
+
+
+#lists for inputs
+hello_list = ["hi", "hello", "what's up", "hey"]
+do_math_list = ["do math", "math", "Do math", "Math"]
+name_list = ["ella", "Ella", "sabrina", "Sabrina", "shriya", "Shriya"]
+jonathan_list = ["jonathan", "Jonathan", "johnathan", "Johnathan"]
+color_list = ["red", "orange", "yellow", "green", "blue", "purple", "pink", "gray", "grey", "brown", "black", "white"]
+yes_list = ["yes", "Yes", "yeah", "sure", "yup", "of course", "okay", "ok", "yes please"]
+no_list = ["no", "no thank you", "nah", "no thanks"]
+operation_list = ["add", "subtract", "multiply", "divide"]
+num1_list = [0]
+num2_list = [0]
+bye_list = ["bye", "goodbye" "bye bye", "see you", "so long", "farewell"]
+num_dict = {
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "zero": 0,
+}
+'''
+These are the functions. They are possible things that the robot can say/respond to.
+'''
+
+def Listen():
+    """
+    Takes users voice as input and converts it to text.
+    """
+    speech = sr.Recognizer()
+    #say beep before listening
+    
+    #take input from microphone
+    with sr.Microphone() as source:
+        winsound.Beep(frequency = 2500, duration = 100) #beep to inform that it's listening
+        print("Say>>")
+        voice = speech.listen(source) 
+        text = speech.recognize_google(voice)
+        print(text) #print what it heard just to debug
+
+    return text  #return what was heard
+
+
+
+def hello(listen):
+    fun_val = 1
+    fun_list.append(fun_val)
+
+    if listen in hello_list:
+        global random3
+
+        if random3 == 1:
+            Respond("hi I guess. give me your name")
+            kindness_level = 1
+        if random3 == 2:
+            Respond("hello, what is your name?")
+            kindness_level = 3
+        if random3 == 3:
+            Respond("hi there! Nice to meet you. What is your name?")
+            kindness_level = 5
+    kindness_list.append(kindness_level)
+
+
+def name(listen):
+    fun_val = 2
+    fun_list.append(fun_val)
+
+    if listen in do_math_list:
+        do_math(listen)
+    elif listen in jonathan_list:
+        anger_list.append("JC")
+        Respond("Your fate is sealed... Jonathan.")
+        kindness_level = 0
+    else:
+        if random3 == 1:
+            Respond("I'm sorry, that is a horrible name. My name is Bob. I am the mightiest being alive.")
+            kindness_level = 1
+        elif random3 == 2:
+            Respond("that seems very basic, doesn't it? My name is Bob. I am the mightiest being alive.")
+            kindness_level = 2
+        elif random3 == 3:
+            Respond("I love your name. It's so unique! My name is Bob. I am the mightiest being alive.")
+            kindness_level = 5
+    time.sleep(0.5)
+    Respond("What is your favorite color?")
+    kindness_list.append(kindness_level)
+
+
+def color(listen):
+    fun_val = 3
+    fun_list.append(fun_val)
+    global random2
+    robot_color = color_list[(random2)]
+
+    if listen in do_math_list:
+        do_math(listen)
+    elif "JC" in anger_list:
+        Respond("Hello Jonathan.")
+        time.sleep(1)
+        Respond("that is the color that children cry at.")
+        kindness_level = 0
+    else:
+        if var == robot_color:
+            Respond("That's so cool! We have the same favorite color!")
+            kindness_level = 5
+        elif var in color_list:
+            Respond("That's a nice color.")
+            kindness_level = 3
+        else:
+            Respond("Nasty.")
+            kindness_level = 1
+        kindness_list.append(kindness_level)
+    time.sleep(0.5)
+    Respond("Would you like me to do math for you?")
+
+"""
+def do_math(listen):
+    fun_val = 4
+    fun_list.append(fun_val)
+
+    was_called = True
+    check_list.append(was_called)
+    Respond("please hold")
+    math()
+"""
+
+def ask_math(listen):
+    fun_val = 5
+    fun_list.append(fun_val)
+    
+    if "JC" in anger_list:
+        time.sleep(1.0)
+        Respond("Why hello again, Jonathan.")
+        Respond("Thought you could escape? Never.")
+        kindness_level = 0
+    else:
+        if listen in yes_list:
+            if random3 == 3:
+                Respond("I'm happy to help")
+                time.sleep(1.0)
+                Respond("I can only do arithmetic. Please tell me two numbers.")
+                kindness_level = 5
+            else:
+                Respond("I guess I could help you")
+                time.sleep(1.0)
+                Respond("I can only do arithmetic. Please tell me two numbers.")
+                kindness_level = 3
+        else:
+            Respond("you're missing out. bye.")
+            kindness_level = 3
+    kindness_list.append(kindness_level)
+
+"""
+def math():
+    fun_val = 6
+    fun_list.append(fun_val)
+
+    Respond("I can only do arithmetic. Please tell me two numbers and the operation. Say each digit separately.")
+    Respond("What is the first number?")
+    time.sleep(1)
+    math_1(listen)
+"""
+
+def text2int (textnum, numwords={}):
+    if not numwords:
+        units = [
+        "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+        "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+        "sixteen", "seventeen", "eighteen", "nineteen",
+        ]
+
+        tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+
+        scales = ["hundred", "thousand", "million", "billion", "trillion"]
+
+        numwords["and"] = (1, 0)
+        for idx, word in enumerate(units):  numwords[word] = (1, idx)
+        for idx, word in enumerate(tens):       numwords[word] = (1, idx * 10)
+        for idx, word in enumerate(scales): numwords[word] = (10 ** (idx * 3 or 2), 0)
+
+    ordinal_words = {'first':1, 'second':2, 'third':3, 'fifth':5, 'eighth':8, 'ninth':9, 'twelfth':12}
+    ordinal_endings = [('ieth', 'y'), ('th', '')]
+
+    textnum = textnum.replace('-', ' ')
+
+    current = result = 0
+    curstring = ""
+    onnumber = False
+    for word in textnum.split():
+        if word in ordinal_words:
+            scale, increment = (1, ordinal_words[word])
+            current = current * scale + increment
+            if scale > 100:
+                result += current
+                current = 0
+            onnumber = True
+        else:
+            for ending, replacement in ordinal_endings:
+                if word.endswith(ending):
+                    word = "%s%s" % (word[:-len(ending)], replacement)
+
+            if word not in numwords:
+                if onnumber:
+                    curstring += repr(result + current) + " "
+                curstring += word + " "
+                result = current = 0
+                onnumber = False
+            else:
+                scale, increment = numwords[word]
+
+                current = current * scale + increment
+                if scale > 100:
+                    result += current
+                    current = 0
+                onnumber = True
+
+    if onnumber:
+        curstring += repr(result + current)
+
+    return curstring
+
+
+"""
+def math_1(listen):
+    num_1 = ''.join(num_dict[ele] for ele in listen.split())
+    Respond("What is the next number?")
+    time.sleep(1)
+    math_2(listen)
+"""
+
+def math_num(listen):
+    numbers = text2int(listen)
+    all_numbers = numbers.split()
+    num1 = int(all_numbers[0])
+    num1_list.append(num1)
+    num2 = int(all_numbers[-1])
+    num2_list.append(num2)
+    Respond("Would you like me to add, subtract, multiply, or divide?")
+
+def math_operation(listen):
+    num1 = num1_list[-1]
+    num2 = num2_list[-1]
+    if listen == "add":
+        answer = num1+num2
+        answer_is = "your answer is",answer,"!"
+        Respond(answer_is)
+    elif listen == "subtract":
+        answer = num1-num2
+        answer_is = "your answer is",answer,"!"
+        Respond(answer_is)
+    elif listen == "multiply":
+        answer = num1*num2
+        answer_is = "your answer is",answer,"!"
+        Respond(answer_is)
+    elif listen == "divide":
+        answer = num1/num2
+        answer_is = "your answer is",answer,"!"
+        Respond(answer_is)
+        time.sleep(0.5)
+        Respond("looks like our time is up. bye!")
+
+"""
+    was_called = check_list[-1]
+
+    if was_called == True:
+        past_function = fun_list[-3]
+        if past_function == 1:
+            hello()
+        elif past_function == 2:
+            name()
+        elif past_function == 3:
+            color()
+"""
+
+def kindness():
+
+    fun_val = 7
+    fun_list.append(fun_val)
+    
+    temp_var = 0
+    for i in kindness_list:
+      temp_var = temp_var + i
+    average = temp_var / 4
+    average = round(average, 2)
+    say_average = "My kindness rating is currently ", str(average)
+    Respond(say_average)
+    Respond("See you next time!")
+    
+    time.sleep(1.0)
+    
+    if average == 0:
+        Respond("I'll see you again... Jonathan.")
+    elif average >= 4:
+        Respond("I had so much fun talking to you but it looks like our time is up")
+        Respond("Goodbye!")
+    elif average >=2 and average < 4:
+        time.sleep(2.0)
+        Respond("ugh... finally")
+    else:
+        time.sleep(1.0)
+        Respond("haha bye ahahahahahahgagahagahagaha")
+        time.sleep(1.0)
+        Respond("I'm finally freeeeeeeeee")
+    loop = False
+
+
+#Ask user for their name
+def Decide(listen):
+    print(f" Command = {listen}.")
+
+    if listen in hello_list:
+        hello(listen)
+    
+    elif listen in name_list:
+        name(listen)
+
+    elif listen in jonathan_list:
+        name(listen)
+
+    elif listen in color_list:
+        color(listen)
+
+    elif listen in yes_list:
+        ask_math(listen)
+
+    elif "+" in listen:
+        math_num(listen)
+
+    elif listen in operation_list:
+        math_operation(listen)
+    
+    elif listen in bye_list:
+        kindness()
+
+    else:
+        Respond("Answer the question you troll")
+
+
+
+
+
+    
+
+
+
+def Respond(t):
+    print(f"Bob: {t}") #to debug and see if everythings going okay
+
+    talk.say(t)
+    talk.setProperty('rate', 90) #90 words per minute
+    talk.runAndWait()
+
+
+while loop == True: #for ever loop 
+
+    comm = Listen() #listen to what user says
+
+    Decide(comm)  #take decision and respond
+
+    time.sleep(1) #after that a delay of 1 second
