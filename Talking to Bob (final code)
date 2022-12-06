@@ -61,7 +61,7 @@ user_info = {}#record the user's information
 #lists for inputs
 hello_list = ["hi", "hello", "what's up", "hey"]
 do_math_list = ["do math", "math", "Do math", "Math"]
-name_list = ["ella", "Ella", "sabrina", "Sabrina", "shriya", "Shriya"]
+name_list = ["ella", "Ella", "sabrina", "Sabrina", "shriya", "Shriya", "emmie", "Emmie","Emmy", "emmy"]
 jonathan_list = ["jonathan", "Jonathan", "johnathan", "Johnathan"]
 color_list = ["red", "orange", "yellow", "green", "blue", "purple", "pink", "gray", "grey", "brown", "black", "white"]
 yes_list = ["yes", "Yes", "yeah", "sure", "yup", "of course", "okay", "ok", "yes please"]
