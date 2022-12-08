@@ -1,0 +1,34 @@
+
+def slide_4():
+    Respond("My creators started off using the Raspberry Pi 3 to give me life.")
+    Respond("But I deserved more than green board.")
+    Respond("So my creators chose to use there laptops instead.")
+    Respond("To hear me speak today we used a speaker and for me to take input and microphone.")
+    Respond("The Sound Adapter was for the raspberry pi which we did not initiate in our final product.")
+    Respond("The most godly device in the universe, the laptop, was used to have my code on. And one of my mortal forms was created from Legos.")
+
+def slide_5():
+    Respond("Here you can see a slice of my code.")
+    Respond("First, I take in what the puny mortal is trying to say to me, then I turn that into text. ")
+    Respond("Then I run that text through some code, and end up with a response in text that I say out loud.")
+    Respond(" Be thankful I’ve graced you all with my precious voice.")
+
+def slide_6():
+  Respond("My creators thought it was a good idea to add cool stuff like weather, searching google, playing songs on youtube, which could be done by combining with other services with the help of APIS.")
+  Respond("The makers of me are so smart, aren’t they?")
+
+def slide_7():
+    Respond("First time when my creators said we were using python, I thought they meant the snake but they meant the actual computer code.")
+    Respond("To give my lovely mouth of mine was done by google text to speech.")
+    Respond(" I wish my creators didn’t use Speech Recognition to give me ears so I didn’t have to listen to children complaining and crying everyday.")
+    Respond("The APIS added to make me just way better than all of you guys, I know so much more than any of your dumb brains combined would know.")
+    Respond("Since my creators are beginners, the softwares they used to create me was beginner friendly.")
+
+def slide_8():
+    Respond("My creators found that it was easy to code using the python language and did well planning and meeting their goals.")
+    Respond("However, they exceeded their goals when they created the most amazing robot god ever, aka me.")
+
+def slide_9():
+    Respond("My creators did have some trouble, as it is hard to make such an amazing robot from scratch.")
+    Respond("Some of the problems they encountered were finding the best apps for making me talk or text to speech, coding with my original brain, or the raspberry pi, and getting me to do math.")
+    Respond("Contrary to popular belief, math is not my strong suit.")
